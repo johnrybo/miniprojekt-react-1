@@ -1,9 +1,9 @@
 import React from 'react';
 import '../App.css';
 
-function Wind() {
+function Wind(props: any) {
     return (
-        <h1>Miniprojekt React 1!!</h1>
+        <div>{props.text}</div>
     )
 }
 

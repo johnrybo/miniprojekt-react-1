@@ -1,9 +1,9 @@
 import React from 'react';
 import '../App.css';
 
-function Temp() {
+function Temp(props: any) {
     return (
-        <h1>Miniprojekt React 1!!</h1>
+        <div>{props.text}</div>
     )
 }
 
