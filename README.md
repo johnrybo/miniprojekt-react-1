@@ -1,3 +1,12 @@
+# Miniprojekt React 1
+
+Projektet har skapats med:
+npx create-react-app . --template typescript
+
+Instruktioner:
+1. Kör npm install
+2. Kör npm start
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
