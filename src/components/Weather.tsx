@@ -52,10 +52,29 @@ class Weather extends Component {
     const response = await fetch(url);
     const result = await response.json();
 
-    let temp = result.timeSeries[0].parameters[1].values[0];
-    let wd = result.timeSeries[0].parameters[4].values[0];
-    let ws = result.timeSeries[0].parameters[4].values[0];
-    let wsymb2 = result.timeSeries[0].parameters[18].values[0];
+    console.log(result.timeSeries[0]);
+
+    let temp;
+    let wd;
+    let ws;
+    let wsymb2;
+
+    // Om temperaturen är på index 1
+    if (result.timeSeries[0].parameters[1].name === 't') {
+
+      temp = result.timeSeries[0].parameters[1].values[0];
+      wd = result.timeSeries[0].parameters[3].values[0];
+      ws = result.timeSeries[0].parameters[4].values[0];
+      wsymb2 = result.timeSeries[0].parameters[18].values[0];
+
+      // Om temperaturen är på index 10
+  } else if (result.timeSeries[0].parameters[10].name === 't') {
+
+      temp = result.timeSeries[0].parameters[10].values[0];
+      wd = result.timeSeries[0].parameters[13].values[0];
+      ws = result.timeSeries[0].parameters[14].values[0];
+      wsymb2 = result.timeSeries[0].parameters[18].values[0];
+  }
     
     this.setState({
       temp: temp,
