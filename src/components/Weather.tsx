@@ -40,7 +40,7 @@ class Weather extends Component {
     }
   
     const error = (err: any) => {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
+      alert(`Slå på platstjänster!`);
     }
   
     navigator.geolocation.getCurrentPosition(success, error);
