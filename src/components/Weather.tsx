@@ -106,10 +106,9 @@ class Weather extends Component {
         </div>
       );
     } else {
-      return(
-        <div>Slå på dina platstjänster och ladda om sidan!</div>
-      )
-      
+        return(
+          <div>Slå på dina platstjänster och ladda om sidan!</div>
+        )
     }
     
 

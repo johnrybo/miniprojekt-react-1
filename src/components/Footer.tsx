@@ -4,7 +4,7 @@ import '../App.css';
 function Footer() {
     return(
         <footer>
-            <p>VÄDRET HOS DIG 2021🌤</p>
+            <p>© JML 2021🌤</p>
         </footer>
     )
 }

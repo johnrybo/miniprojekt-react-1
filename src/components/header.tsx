@@ -4,7 +4,7 @@ import '../App.css';
 function Header() {
     return (
        <header>
-           <p>VÄDRET HOS DIG 🌤☁️⛈❄️☃️💨</p>
+           <p>🌤☁️⛈❄️☃️💨</p>
        </header>
     )
 }
