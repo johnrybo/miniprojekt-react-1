@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 //import components
-import Header from './components/Header';
+import Header from './components/header'
 import Weather from './components/Weather';
 
 function App() {
