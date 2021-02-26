@@ -51,6 +51,7 @@ class Weather extends Component {
       })
     }
 
+
     navigator.geolocation.getCurrentPosition(success, error);
   }
 
@@ -111,6 +112,7 @@ class Weather extends Component {
       
     }
     
+
   }
 }
 
