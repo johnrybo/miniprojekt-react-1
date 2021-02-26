@@ -19,15 +19,12 @@ class ErrorBoundary extends Component<Props, State> {
     console.log({ error, errorInfo });
   }
 
-  // eslint-disable-next-line no-restricted-globals
-  navigateBack = () => history.back();
 
   render() {
     if (this.state.hasError) {
       return (
         <div style={rootStyle}>
           <p style={textStyle}>D blev fel :(</p>
-          <button onClick={this.navigateBack}>Gå tebax</button>
         </div>
       );
     }

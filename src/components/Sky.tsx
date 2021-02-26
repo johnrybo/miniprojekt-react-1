@@ -6,10 +6,6 @@ interface Props {
 }
 
 export default function Sky(props: Props) {
-    
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    (null as any).abc
-
     return (
         <div>{props.text}</div>
     )
