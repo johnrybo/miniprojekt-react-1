@@ -5,6 +5,7 @@ import "../App.css";
 import Temp from "./Temp";
 import Wind, { getWindDirection } from "./Wind";
 import Sky, { getSky } from "./Sky";
+import ErrorBoundary from "./errorBoundary";
 
 interface State {
   temp: number;
@@ -40,8 +41,8 @@ class Weather extends Component {
 
     const error = (err: any) => {
       alert(`Slå på platstjänster!`);
-       console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    };
 
     navigator.geolocation.getCurrentPosition(success, error);
   }
@@ -83,14 +84,15 @@ class Weather extends Component {
   }
 
   render() {
-
     return (
       <div className="Weather">
         <Temp text={this.state.temp + " °C"} />
         <Wind
           text={this.state.windDirection + " " + this.state.windSpeed + " m/s"}
         />
-        <Sky text={this.state.sky} />
+        <ErrorBoundary>
+          <Sky text={this.state.sky} />
+        </ErrorBoundary>
       </div>
     );
   }
