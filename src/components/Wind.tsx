@@ -5,6 +5,7 @@ interface Props {
     text: string;
 }
 
+
 export default function Wind(props: Props) {
     return (
         <div>{props.text}</div>

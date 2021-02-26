@@ -5,12 +5,14 @@ import "../App.css";
 import Temp from "./Temp";
 import Wind, { getWindDirection } from "./Wind";
 import Sky, { getSky } from "./Sky";
+import ErrorBoundary from "./errorBoundary";
 
 interface State {
   temp: number;
   windDirection: string;
   windSpeed: number;
   sky: string;
+  location: boolean;
 }
 
 class Weather extends Component {
@@ -19,6 +21,7 @@ class Weather extends Component {
     windDirection: "",
     windSpeed: 0,
     sky: "",
+    location: false,
   };
 
   // Oklart om detta är korrekt sätt att köra getUserLocation()
@@ -36,11 +39,16 @@ class Weather extends Component {
       let latitude = crd.latitude.toFixed(5);
 
       this.getWeather(longitude, latitude);
+
+      this.setState({
+      location: true
+      });
     };
 
     const error = (err: any) => {
-      alert(`Slå på platstjänster!`);
-       console.warn(`ERROR(${err.code}): ${err.message}`);
+      this.setState( {
+        location: false
+      })
     }
 
     navigator.geolocation.getCurrentPosition(success, error);
@@ -48,6 +56,7 @@ class Weather extends Component {
 
   // Hämtar vädret från SMHI:s API
   async getWeather(lon: number, lat: number) {
+    
     let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`;
     const response = await fetch(url);
     const result = await response.json();
@@ -83,16 +92,25 @@ class Weather extends Component {
   }
 
   render() {
-
-    return (
-      <div className="Weather">
-        <Temp text={this.state.temp + " °C"} />
-        <Wind
-          text={this.state.windDirection + " " + this.state.windSpeed + " m/s"}
-        />
-        <Sky text={this.state.sky} />
-      </div>
-    );
+    if (this.state.location) {
+      return (
+        <div className="Weather">
+          <Temp text={this.state.temp + " °C"} />
+          <Wind
+            text={this.state.windDirection + " " + this.state.windSpeed + " m/s"}
+          />
+          <ErrorBoundary>
+            <Sky text={this.state.sky} />
+          </ErrorBoundary>
+        </div>
+      );
+    } else {
+      return(
+        <div>Slå på dina platsstjänster och ladda om sidan!</div>
+      )
+      
+    }
+    
   }
 }
 
