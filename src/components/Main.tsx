@@ -6,9 +6,11 @@ import Weather from './Weather';
 
 function Main() {
     return(
-        <div>
+        <main>
+             <h1>Vädret hos dig:</h1>
+             <div><h3>☀️</h3></div>
             <Weather />
-        </div>
+        </main>
     )
 
 }
