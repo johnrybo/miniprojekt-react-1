@@ -5,14 +5,16 @@
   align-items: center;
   flex-direction: column;
   font-family: 'Varela Round', sans-serif;
+  background-color: #3066BE;
 }
 
 header {
-  height: 3rem;
   display: flex;
+  position: fixed;
   width: 100%;
   align-items: center;
-  position: fixed;
+  text-align: center;
+  justify-content: center;
   margin-left: 2rem;
 }
 
