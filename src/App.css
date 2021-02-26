@@ -4,8 +4,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 h1 {
-  color: palevioletred;
+  color: rgb(149, 155, 240);
+  font-size: 5rem;
 }
+
+.Weather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.Weather > * {
+  font-size: 3rem;
+} 

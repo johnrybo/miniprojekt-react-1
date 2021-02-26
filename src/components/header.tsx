@@ -3,7 +3,7 @@ import '../App.css';
 
 function Header() {
     return (
-        <h1>Miniprojekt React 1!!</h1>
+        <h1>Vädret hos dig:</h1>
     )
 }
 
