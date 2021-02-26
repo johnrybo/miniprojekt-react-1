@@ -1,18 +1,60 @@
-import React from 'react';
-import '../App.css';
+import React, { Component } from "react";
+import "../App.css";
 
-interface Props {
-    text: string;
+interface State {
+  sky: number;
 }
 
-export default function Sky(props: Props) {
-    return (
-        <div>{props.text}</div>
-    )
-}
+export default class Sky extends Component {
+  state: State = {
+    sky: 0,
+  };
 
-// Hämtar typ av väder / himmel och gör om till text
-export function getSky(wsymb2: number) {
+  componentDidMount() {
+    this.getUserLocation();
+  }
+
+  // Hämtar användarens position (longitud och latitud)
+  getUserLocation() {
+    const success = (pos: any) => {
+      var crd = pos.coords;
+
+      // SMHI:s API funkar endast med fem decimaler
+      let longitude = crd.longitude.toFixed(5);
+      let latitude = crd.latitude.toFixed(5);
+
+      this.getSky(longitude, latitude);
+    };
+
+    const error = (err: any) => {};
+
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+
+  // Hämtar vädret från SMHI:s API
+  async getSky(lon: number, lat: number) {
+    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`;
+    const response = await fetch(url);
+    const result = await response.json();
+
+    let wsymb2;
+
+    // Om temperaturen är på index 1
+    if (result.timeSeries[0].parameters[1].name === "t") {
+      wsymb2 = this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
+
+      // Om temperaturen är på index 10
+    } else if (result.timeSeries[0].parameters[10].name === "t") {
+      wsymb2 = this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
+    }
+
+    this.setState({
+      sky: wsymb2,
+    });
+  }
+
+  // Hämtar typ av väder / himmel och gör om till text
+  getWsymb2(wsymb2: number) {
     if (wsymb2 === 1) {
       return "Klar himmel";
     } else if (wsymb2 === 2) {
@@ -69,3 +111,8 @@ export function getSky(wsymb2: number) {
       return "Kraftigt snöfall";
     }
   }
+
+  render() {
+    return <div>{this.state.sky}</div>;
+  }
+}
