@@ -3,7 +3,9 @@ import '../App.css';
 
 function Header() {
     return (
-        <h1>Vädret hos dig:</h1>
+       <header>
+           <p>VÄDRET HOS DIG 🌤☁️⛈❄️☃️💨</p>
+       </header>
     )
 }
 
