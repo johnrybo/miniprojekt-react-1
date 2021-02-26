@@ -3,9 +3,9 @@ import '../App.css';
 
 function Footer() {
     return(
-        <div>
-            Detta är footern!
-        </div>
+        <footer>
+            <p>VÄDRET HOS DIG 2021🌤</p>
+        </footer>
     )
 }
 
