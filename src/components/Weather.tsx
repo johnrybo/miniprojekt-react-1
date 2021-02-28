@@ -6,19 +6,16 @@ import Temp from "./Temp";
 import Wind from "./Wind";
 import Sky from "./Sky";
 
+export let longitude = 0;
+export let latitude = 0;
 interface State {
   location: boolean;
 }
 
-export const latitude: number = 0;
-export const longitude: number = 0;
 class Weather extends Component {
   state: State = {
     location: false,
   };
-
-  longitude: any;
-  latitude: any;
 
   componentDidMount() {
     this.getUserLocation();
@@ -27,12 +24,11 @@ class Weather extends Component {
   // Hämtar användarens position (longitud och latitud)
   getUserLocation() {
     const success = (pos: any) => {
-
       var crd = pos.coords;
 
-      // SMHI:s API funkar endast med fem decimaler
-      this.longitude = crd.longitude.toFixed(5);
-      this.latitude = crd.latitude.toFixed(5);
+      // SMHI:s API funkar endast med fem (eller sex?)decimaler
+      longitude = crd.longitude.toFixed(6);
+      latitude = crd.latitude.toFixed(6);
 
       this.setState({
         location: true,

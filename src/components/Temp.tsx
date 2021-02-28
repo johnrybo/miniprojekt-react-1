@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
-import {longitude, latitude} from './Weather';
+import { longitude, latitude } from './Weather';
 
 interface State {
   temp: number;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import "../App.css";
+import { longitude, latitude } from './Weather';
 
 interface State {
   windDirection: number;
@@ -13,24 +14,7 @@ export default class Wind extends Component {
   };
 
   componentDidMount() {
-    this.getUserLocation();
-  }
-
-  // Hämtar användarens position (longitud och latitud)
-  getUserLocation() {
-    const success = (pos: any) => {
-      var crd = pos.coords;
-
-      // SMHI:s API funkar endast med fem decimaler
-      let longitude = crd.longitude.toFixed(5);
-      let latitude = crd.latitude.toFixed(5);
-
-      this.getWind(longitude, latitude);
-    };
-
-    const error = (err: any) => {};
-
-    navigator.geolocation.getCurrentPosition(success, error);
+    this.getWind(longitude, latitude);
   }
 
   // Hämtar vädret från SMHI:s API
