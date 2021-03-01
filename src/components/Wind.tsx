@@ -27,12 +27,12 @@ export default class Wind extends Component {
     let ws;
 
     // Om temperaturen är på index 1
-    if (result.timeSeries[0].parameters[1].name === "t") {
+    if (result.timeSeries[0].parameters[3].name === "wd") {
       wd = this.getWindDirection(result.timeSeries[0].parameters[3].values[0]);
       ws = result.timeSeries[0].parameters[4].values[0];
 
       // Om temperaturen är på index 10
-    } else if (result.timeSeries[0].parameters[10].name === "t") {
+    } else if (result.timeSeries[0].parameters[13].name === "wd") {
       wd = this.getWindDirection(result.timeSeries[0].parameters[13].values[0]);
       ws = result.timeSeries[0].parameters[14].values[0];
     }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
-import { longitude, latitude } from './Weather';
+import { longitude, latitude } from "./Weather";
 
 interface State {
   temp: number;
@@ -28,11 +28,11 @@ export default class Temp extends Component {
       // Om temperaturen är på index 10
     } else if (result.timeSeries[0].parameters[10].name === "t") {
       temp = result.timeSeries[0].parameters[10].values[0];
-
-      this.setState({
-        temp: temp,
-      });
     }
+
+    this.setState({
+      temp: temp,
+    });
   }
 
   render() {

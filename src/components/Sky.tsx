@@ -21,16 +21,7 @@ export default class Sky extends Component {
     const response = await fetch(url);
     const result = await response.json();
 
-    let wsymb2;
-
-    // Om temperaturen är på index 1
-    if (result.timeSeries[0].parameters[1].name === "t") {
-      wsymb2 = this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
-
-      // Om temperaturen är på index 10
-    } else if (result.timeSeries[0].parameters[10].name === "t") {
-      wsymb2 = this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
-    }
+    let wsymb2 = this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
 
     this.setState({
       sky: wsymb2,
