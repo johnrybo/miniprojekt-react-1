@@ -1,8 +1,6 @@
-import React from "react";
 import { Component } from "react";
 import "../App.css";
-import { longitude, latitude } from './Weather';
-
+import { longitude, latitude } from "./Main";
 
 interface State {
   windDirection: number;
@@ -18,24 +16,21 @@ export default class Wind extends Component {
   componentDidMount() {
     // this.getWind(longitude, latitude);
     this.getWind2(longitude, latitude);
-
   }
 
   async getWind2(lon: number, lat: number) {
-
-    let APIKey = 'c2a3479cf7f0d7dd2b48b2f371689e02'
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`
+    let APIKey = "c2a3479cf7f0d7dd2b48b2f371689e02";
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`;
     const response = await fetch(url);
     const result = await response.json();
 
-    console.log('windDirection: ' + result.wind.deg)
-    console.log('windSpeed: ' + result.wind.speed)
+    console.log("windDirection: " + result.wind.deg);
+    console.log("windSpeed: " + result.wind.speed);
 
     this.setState({
       windDirection: this.getWindDirection(result.wind.deg),
-      windSpeed: result.wind.speed
+      windSpeed: result.wind.speed.toFixed(1),
     });
-
   }
 
   // Hämtar vädret från SMHI:s API
@@ -96,7 +91,9 @@ export default class Wind extends Component {
 
   render() {
     return (
-      <div>{this.state.windDirection + ' ' + this.state.windSpeed + " m/s"}</div>
+      <div>
+        {this.state.windDirection + " " + this.state.windSpeed + " m/s"}
+      </div>
     );
   }
 }

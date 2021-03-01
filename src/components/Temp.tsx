@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import "../App.css";
-import { longitude, latitude } from "./Weather";
+import { longitude, latitude } from "./Main";
 
 interface State {
   temp: number;
@@ -25,7 +25,7 @@ export default class Temp extends Component {
     console.log('temp: ' + result.main.temp)
 
     this.setState({
-      temp: result.main.temp.toFixed(1)
+      temp: result.main.temp.toFixed(0)
     });
 
   }

@@ -1,4 +1,4 @@
-import React, { Component, CSSProperties, ErrorInfo } from "react";
+import { Component, CSSProperties, ErrorInfo } from "react";
 
 interface Props {}
 

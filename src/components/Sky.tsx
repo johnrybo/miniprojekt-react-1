@@ -1,16 +1,16 @@
-import React, { Component, CSSProperties } from "react";
+import { Component, CSSProperties } from "react";
 import "../App.css";
-import { longitude, latitude } from "./Weather";
+import { longitude, latitude } from "./Main";
 
 interface State {
   sky: any;
-  emoji: any;
+  icon: any;
 }
 
 export default class Sky extends Component {
   state: State = {
     sky: "",
-    emoji: "",
+    icon: "",
   };
 
   componentDidMount() {
@@ -26,11 +26,11 @@ export default class Sky extends Component {
     const response = await fetch(url);
     const result = await response.json();
 
-    console.log("sky: " + result.weather[0].description);
+    console.log("sky: " + result.weather[0].main);
 
     this.setState({
       sky: result.weather[0].main,
-      emoji: this.getWeatherIcon(result.weather[0].main),
+      icon: this.getWeatherIcon(result.weather[0].main),
     });
   }
 
@@ -136,7 +136,7 @@ export default class Sky extends Component {
         <div style={this.emojiStyle}>
           {" "}
           <img
-            src={`http://openweathermap.org/img/wn/${this.state.emoji}@4x.png`}
+            src={`http://openweathermap.org/img/wn/${this.state.icon}@4x.png`}
             alt="Weather icon"
           />
         </div>
