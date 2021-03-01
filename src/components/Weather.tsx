@@ -6,15 +6,17 @@ import Temp from "./Temp";
 import Wind from "./Wind";
 import Sky from "./Sky";
 
-export let longitude = 0;
-export let latitude = 0;
+// interface WeatherData {
+
+// }
 interface State {
-  location: boolean;
+  locationServices: boolean;
+  weatherData?: any;
 }
 
 class Weather extends Component {
   state: State = {
-    location: false,
+    locationServices: false,
   };
 
   componentDidMount() {
@@ -27,30 +29,40 @@ class Weather extends Component {
       var crd = pos.coords;
 
       // SMHI:s API funkar endast med fem (eller sex?)decimaler
-      longitude = crd.longitude.toFixed(6);
-      latitude = crd.latitude.toFixed(6);
+      const longitude = crd.longitude.toFixed(6);
+      const latitude = crd.latitude.toFixed(6);
 
       this.setState({
-        location: true,
+        locationServices: true,
       });
+
+      this.getWeatherData(longitude, latitude);
     };
 
     const error = (err: any) => {
       this.setState({
-        location: false,
+        locationServices: false,
       });
     };
 
     navigator.geolocation.getCurrentPosition(success, error);
   }
 
+  async getWeatherData(lon: number, lat: number) {
+    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`;
+    const response = await fetch(url);
+    const result = await response.json();
+
+    this.setState({ weatherData: result });
+  }
+
   render() {
-    if (this.state.location) {
+    if (this.state.locationServices) {
       return (
         <div className="Weather">
-          <Temp />
-          <Wind />
-          <Sky />
+          <Temp weatherData={this.state.weatherData}/>
+          <Wind weatherData={this.state.weatherData}/>
+          <Sky weatherData={this.state.weatherData}/>
         </div>
       );
     } else {

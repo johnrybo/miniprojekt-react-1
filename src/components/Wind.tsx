@@ -1,28 +1,28 @@
 import React from "react";
 import { Component } from "react";
 import "../App.css";
-import { longitude, latitude } from './Weather';
 
-interface State {
-  windDirection: number;
-  windSpeed: number;
+interface Props {
+  weatherData: any;
 }
-export default class Wind extends Component {
+interface State {
+  windDirection: any;
+  windSpeed: any;
+}
+export default class Wind extends Component<Props, State> {
   state: State = {
     windDirection: 0,
     windSpeed: 0,
   };
 
   componentDidMount() {
-    this.getWind(longitude, latitude);
+    this.getWind();
   }
 
-  // Hämtar vädret från SMHI:s API
-  async getWind(lon: number, lat: number) {
-    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`;
-    const response = await fetch(url);
-    const result = await response.json();
-
+  // Hämtar vädret från Weather
+  async getWind() {
+   
+    const result = this.props.weatherData;
     let wd;
     let ws;
 

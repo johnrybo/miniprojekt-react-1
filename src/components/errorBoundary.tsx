@@ -19,7 +19,7 @@ class ErrorBoundary extends Component<Props, State> {
     console.log({ error, errorInfo });
   }
 
-
+// 
   render() {
     if (this.state.hasError) {
       return (

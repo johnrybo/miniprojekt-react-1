@@ -1,31 +1,30 @@
 import React, { Component } from "react";
 import "../App.css";
-import { longitude, latitude } from './Weather';
 
+interface Props {
+  weatherData: any;
+}
 interface State {
-  sky: number;
+  sky: any;
 }
 
-export default class Sky extends Component {
+export default class Sky extends Component<Props, State> {
   state: State = {
     sky: 0,
   };
 
   componentDidMount() {
-    this.getSky(longitude, latitude);
+    this.getSky();
   }
 
   // Hämtar vädret från SMHI:s API
-  async getSky(lon: number, lat: number) {
-    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`;
-    const response = await fetch(url);
-    const result = await response.json();
+  async getSky() {
+    const result = this.props.weatherData;
 
-    let wsymb2 = this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
 
-    this.setState({
-      sky: wsymb2,
-    });
+    let sky = this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
+
+    this.setState({ sky });
   }
 
   // Hämtar typ av väder / himmel och gör om till text
