@@ -14,7 +14,11 @@ function Footer() {
           </Link>
         </p>
       </footer>
-      <Route path="/info" component={Info} />
+
+      <Route path="/info">
+        <Info />
+      </Route>
+
     </Router>
   );
 }

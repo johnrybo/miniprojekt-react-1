@@ -16,7 +16,25 @@ export default class Wind extends Component {
   };
 
   componentDidMount() {
-    this.getWind(longitude, latitude);
+    // this.getWind(longitude, latitude);
+    this.getWind2(longitude, latitude);
+
+  }
+
+  async getWind2(lon: number, lat: number) {
+
+    let APIKey = 'c2a3479cf7f0d7dd2b48b2f371689e02'
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`
+    const response = await fetch(url);
+    const result = await response.json();
+
+    console.log('windDirection: ' + result.wind.deg)
+    console.log('windSpeed: ' + result.wind.speed)
+
+    this.setState({
+      windDirection: this.getWindDirection(result.wind.deg),
+      windSpeed: result.wind.speed
+    });
 
   }
 

@@ -11,7 +11,23 @@ export default class Temp extends Component {
   };
 
   componentDidMount() {
-    this.getTemp(longitude, latitude);
+    // this.getTemp(longitude, latitude);
+    this.getTemp2(longitude, latitude);
+  }
+
+  async getTemp2(lon: number, lat: number) {
+
+    let APIKey = 'c2a3479cf7f0d7dd2b48b2f371689e02'
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`
+    const response = await fetch(url);
+    const result = await response.json();
+    
+    console.log('temp: ' + result.main.temp)
+
+    this.setState({
+      temp: result.main.temp.toFixed(1)
+    });
+
   }
 
   async getTemp(lon: number, lat: number) {
