@@ -1,24 +1,147 @@
-import { Component } from "react";
+import { Component, CSSProperties } from "react";
 import "../App.css";
 
 import Temp from "./Temp";
 import Wind from "./Wind";
 import Sky from "./Sky";
-import ErrorBoundary from './errorBoundary';
 
+interface State {
+  locationServices: boolean;
+  position: string;
+  temp: number;
+  windDirection: number;
+  windSpeed: number;
+  sky: string;
+  icon: string;
+}
 class Weather extends Component {
+  state: State = {
+    locationServices: false,
+    position: "",
+    temp: 0,
+    windDirection: 0,
+    windSpeed: 0,
+    sky: "",
+    icon: "",
+  };
+
+  componentDidMount() {
+    this.getUserLocation();
+  }
+
+  getUserLocation() {
+    const success = (pos: any) => {
+      var crd = pos.coords;
+
+      // SMHI:s API funkar endast med fem (eller sex?)decimaler
+      let longitude = crd.longitude.toFixed(6);
+      let latitude = crd.latitude.toFixed(6);
+
+      this.getWeather(longitude, latitude);
+
+      this.setState({
+        locationServices: true,
+      });
+    };
+
+    const error = (err: any) => {
+      this.setState({
+        locationServices: false,
+      });
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+
+  async getWeather(lon: number, lat: number) {
+    let APIKey = "c2a3479cf7f0d7dd2b48b2f371689e02";
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`;
+    const response = await fetch(url);
+    const result = await response.json();
+
+    this.setState({
+      position: result.name,
+      temp: result.main.temp.toFixed(0),
+      windDirection: this.getWindDirection(result.wind.deg),
+      windSpeed: result.wind.speed.toFixed(1),
+      sky: result.weather[0].main,
+      icon: this.getWeatherIcon(result.weather[0].main),
+    });
+  }
+
+  getWindDirection = (wd: number) => {
+    let west: string = "\u2190";
+    let north: string = "\u2191";
+    let east: string = "\u2192";
+    let south: string = "\u2193";
+    let northwest: string = "\u2196";
+    let northeast: string = "\u2197";
+    let southeast: string = "\u2198";
+    let southwest: string = "\u2199";
+
+    if (wd > 337.5 || wd < 22.5) {
+      return west;
+    } else if (wd > 22.5 && wd < 67.5) {
+      return northwest;
+    } else if (wd > 67.5 && wd < 112.5) {
+      return north;
+    } else if (wd > 112.5 && wd < 157.5) {
+      return northeast;
+    } else if (wd > 157.5 && wd < 202.5) {
+      return east;
+    } else if (wd > 202.5 && wd < 247.5) {
+      return southeast;
+    } else if (wd > 247.5 && wd < 292.5) {
+      return south;
+    } else if (wd > 292.5 && wd < 337.5) {
+      return southwest;
+    }
+  };
+
+  getWeatherIcon(sky: any) {
+    if (sky === "Clear") {
+      return "01d";
+    } else if (sky === "Thunderstorm") {
+      return "11d";
+    } else if (sky === "Drizzle") {
+      return "09d";
+    } else if (sky === "Rain") {
+      return "10d";
+    } else if (sky === "Snow") {
+      return "13d";
+    } else if (sky === "Clouds") {
+      return "03d";
+    } else {
+      return "50d"; // Atmosphere
+    }
+  }
 
   render() {
+    if (this.state.locationServices) {
       return (
         <div className="Weather">
-          <ErrorBoundary>
-              <Temp />
-              <Wind />
-              <Sky />
-          </ErrorBoundary>
+          <h1 style={h1style}>{this.state.position}</h1>
+          <Temp temp={this.state.temp} />
+          <Wind
+            windDirection={this.state.windDirection}
+            windSpeed={this.state.windSpeed}
+          />
+          <Sky sky={this.state.sky} icon={this.state.icon} />
         </div>
       );
+    } else {
+      return (
+        <div>
+          <h1>Slå på dina platstjänster och ladda om sidan!</h1>
+        </div>
+      );
+    }
   }
 }
+
+const h1style: CSSProperties = {
+  marginBottom: "2rem",
+  fontSize: "5rem",
+};
 
 export default Weather;
