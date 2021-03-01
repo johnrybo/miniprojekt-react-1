@@ -8,7 +8,7 @@ interface State {
 
 class ErrorBoundary extends Component<Props, State> {
   state: State = {
-    hasError: false,
+    hasError: false
   };
 
   static getDerivedStateFromError(): State {
@@ -24,17 +24,20 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div style={rootStyle}>
-          <p style={textStyle}>D blev fel :(</p>
+          <p style={textStyle}>Något gick fel. Ladda om sidan!</p>
         </div>
       );
     }
-
     return this.props.children;
   }
 }
 
+export function testErrorBoundary() {
+  const nullVariable: any = null;
+  console.log(nullVariable.somethingThatDoesNotExist);
+}
+
 const rootStyle: CSSProperties = {
-  background: 'white',
   width: "100%",
   height: "100%",
   display: 'flex',

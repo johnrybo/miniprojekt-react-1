@@ -1,14 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, CSSProperties } from "react";
 import "../App.css";
 import { longitude, latitude } from './Weather';
 
 interface State {
-  sky: number;
+  sky: any,
+  emoji: any
 }
 
 export default class Sky extends Component {
   state: State = {
-    sky: 0,
+    sky: '',
+    emoji: ''
   };
 
   componentDidMount() {
@@ -21,73 +23,78 @@ export default class Sky extends Component {
     const response = await fetch(url);
     const result = await response.json();
 
-    let wsymb2 = this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
-
-    this.setState({
-      sky: wsymb2,
-    });
+    this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
   }
 
   // Hämtar typ av väder / himmel och gör om till text
   getWsymb2(wsymb2: number) {
     if (wsymb2 === 1) {
-      return "Klar himmel";
-    } else if (wsymb2 === 2) {
-      return "Nästan klar himmel";
-    } else if (wsymb2 === 3) {
-      return "Varierande molnighet";
-    } else if (wsymb2 === 4) {
-      return "Halvklar himmel";
-    } else if (wsymb2 === 5) {
-      return "Molnig himmel";
-    } else if (wsymb2 === 6) {
-      return "Mulet";
+      this.setState({
+        sky: "Klar himmel",
+        emoji: "☀️"
+      });
+      
+    } else if (wsymb2 === 2 || wsymb2 === 3 || wsymb2 === 4) {
+      this.setState({
+        sky: "Varierande molnighet",
+        emoji: "⛅"
+      });
+
+    } else if (wsymb2 === 5 || wsymb2 === 6) {
+      this.setState({
+        sky: "Mulet",
+        emoji: "☁️"
+      });
+
     } else if (wsymb2 === 7) {
-      return "Dimma";
-    } else if (wsymb2 === 8) {
-      return "Lätta regnskurar";
-    } else if (wsymb2 === 9) {
-      return "Måttliga regnskurar";
-    } else if (wsymb2 === 10) {
-      return "Kraftiga regnskurar";
-    } else if (wsymb2 === 11) {
-      return "Åskväder";
-    } else if (wsymb2 === 12) {
-      return "Lätta skurar av snöblandat regn";
-    } else if (wsymb2 === 13) {
-      return "Måttligt skurar av snöblandat regn";
-    } else if (wsymb2 === 14) {
-      return "Kraftiga skurar av snöblandat regn";
-    } else if (wsymb2 === 15) {
-      return "Lätta snöbyar";
-    } else if (wsymb2 === 16) {
-      return "Måttliga snöbyar";
-    } else if (wsymb2 === 17) {
-      return "Kraftiga snöbyar";
-    } else if (wsymb2 === 18) {
-      return "Duggregn";
-    } else if (wsymb2 === 19) {
-      return "Måttligt regn";
-    } else if (wsymb2 === 20) {
-      return "Kraftigt regn";
-    } else if (wsymb2 === 21) {
-      return "Åska";
-    } else if (wsymb2 === 22) {
-      return "Lätt snöblandat regn";
-    } else if (wsymb2 === 23) {
-      return "Måttligt snöblandat regn";
-    } else if (wsymb2 === 24) {
-      return "Kraftigt snöblandat regn";
-    } else if (wsymb2 === 25) {
-      return "Lätt snöfall";
-    } else if (wsymb2 === 26) {
-      return "Måttligt snöfall";
-    } else if (wsymb2 === 27) {
-      return "Kraftigt snöfall";
+      this.setState({
+        sky: "Dimma",
+        emoji: "🌫"
+      });
+      
+    } else if (wsymb2 === 8 || wsymb2 === 9 || wsymb2 === 10 || wsymb2 === 18 || wsymb2 === 19 || wsymb2 === 20) {
+      this.setState({
+        sky: "Regn",
+        emoji: "�"
+      });
+
+    } else if (wsymb2 === 11 || wsymb2 === 21) {
+      this.setState({
+        sky: "Åskväder",
+        emoji: "⚡️"
+      });
+
+    } else if (wsymb2 === 12 || wsymb2 === 13 || wsymb2 === 14 || wsymb2 === 22 || wsymb2 === 23 || wsymb2 === 24) {
+      this.setState({
+        sky: "Snöblandat regn",
+        emoji: "🌨"
+      });
+
+    } else if (wsymb2 === 15 || wsymb2 === 16 || wsymb2 === 17 || wsymb2 === 25 || wsymb2 === 26 || wsymb2 === 27) {
+      this.setState({
+        sky: "Snöfall",
+        emoji: "❄️"
+      })
     }
   }
 
-  render() {
-    return <div>{this.state.sky}</div>;
+    render() {
+      return (
+        <div>
+          <div style={this.skyStyle}>{this.state.sky}</div>
+          <div style={this.emojiStyle}>{this.state.emoji}</div>
+        </div>
+      )
   }
+
+skyStyle: CSSProperties = {
+  fontSize: '3rem',
+  textAlign: 'center'
+}
+
+emojiStyle: CSSProperties = {
+  textAlign: 'center',
+  fontSize: '5rem'
+}
+
 }

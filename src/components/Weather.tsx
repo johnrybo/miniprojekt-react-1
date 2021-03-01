@@ -5,6 +5,7 @@ import "../App.css";
 import Temp from "./Temp";
 import Wind from "./Wind";
 import Sky from "./Sky";
+import ErrorBoundary from './errorBoundary';
 
 export let longitude = 0;
 export let latitude = 0;
@@ -48,9 +49,11 @@ class Weather extends Component {
     if (this.state.location) {
       return (
         <div className="Weather">
-          <Temp />
-          <Wind />
-          <Sky />
+          <ErrorBoundary>
+              <Temp />
+              <Wind />
+              <Sky />
+          </ErrorBoundary>
         </div>
       );
     } else {

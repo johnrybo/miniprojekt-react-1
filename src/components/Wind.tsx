@@ -3,10 +3,12 @@ import { Component } from "react";
 import "../App.css";
 import { longitude, latitude } from './Weather';
 
+
 interface State {
   windDirection: number;
   windSpeed: number;
 }
+
 export default class Wind extends Component {
   state: State = {
     windDirection: 0,
@@ -15,6 +17,7 @@ export default class Wind extends Component {
 
   componentDidMount() {
     this.getWind(longitude, latitude);
+
   }
 
   // Hämtar vädret från SMHI:s API

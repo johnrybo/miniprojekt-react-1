@@ -49,6 +49,7 @@ main {
 h1 {
   color: white;
   font-size: 6rem;
+  text-align: center;
 }
 
 .Weather {
