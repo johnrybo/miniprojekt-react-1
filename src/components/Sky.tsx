@@ -1,18 +1,35 @@
-import React from 'react';
-import '../App.css';
+import React, { Component } from "react";
+import "../App.css";
+import { longitude, latitude } from './Weather';
 
-interface Props {
-    text: string;
+interface State {
+  sky: number;
 }
 
-export default function Sky(props: Props) {
-    return (
-        <div>{props.text}</div>
-    )
-}
+export default class Sky extends Component {
+  state: State = {
+    sky: 0,
+  };
 
-// Hämtar typ av väder / himmel och gör om till text
-export function getSky(wsymb2: number) {
+  componentDidMount() {
+    this.getSky(longitude, latitude);
+  }
+
+  // Hämtar vädret från SMHI:s API
+  async getSky(lon: number, lat: number) {
+    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`;
+    const response = await fetch(url);
+    const result = await response.json();
+
+    let wsymb2 = this.getWsymb2(result.timeSeries[0].parameters[18].values[0]);
+
+    this.setState({
+      sky: wsymb2,
+    });
+  }
+
+  // Hämtar typ av väder / himmel och gör om till text
+  getWsymb2(wsymb2: number) {
     if (wsymb2 === 1) {
       return "Klar himmel";
     } else if (wsymb2 === 2) {
@@ -69,3 +86,8 @@ export function getSky(wsymb2: number) {
       return "Kraftigt snöfall";
     }
   }
+
+  render() {
+    return <div>{this.state.sky}</div>;
+  }
+}

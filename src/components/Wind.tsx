@@ -1,28 +1,59 @@
-import React from 'react';
-import '../App.css';
+import React from "react";
+import { Component } from "react";
+import "../App.css";
+import { longitude, latitude } from './Weather';
 
-interface Props {
-    text: string;
+interface State {
+  windDirection: number;
+  windSpeed: number;
 }
+export default class Wind extends Component {
+  state: State = {
+    windDirection: 0,
+    windSpeed: 0,
+  };
 
+  componentDidMount() {
+    this.getWind(longitude, latitude);
+  }
 
-export default function Wind(props: Props) {
-    return (
-        <div>{props.text}</div>
-    )
-}
+  // Hämtar vädret från SMHI:s API
+  async getWind(lon: number, lat: number) {
+    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`;
+    const response = await fetch(url);
+    const result = await response.json();
 
-// Hämtar vindriktning och gör om till pil
-export const getWindDirection = (wd: number) => {
-    let west: string = '\u2190';
-    let north: string = '\u2191';
-    let east: string = '\u2192';
-    let south: string = '\u2193';
-    let northwest: string = '\u2196';
-    let northeast: string = '\u2197';
-    let southeast: string = '\u2198';
-    let southwest: string = '\u2199';
-  
+    let wd;
+    let ws;
+
+    // Om temperaturen är på index 1
+    if (result.timeSeries[0].parameters[3].name === "wd") {
+      wd = this.getWindDirection(result.timeSeries[0].parameters[3].values[0]);
+      ws = result.timeSeries[0].parameters[4].values[0];
+
+      // Om temperaturen är på index 10
+    } else if (result.timeSeries[0].parameters[13].name === "wd") {
+      wd = this.getWindDirection(result.timeSeries[0].parameters[13].values[0]);
+      ws = result.timeSeries[0].parameters[14].values[0];
+    }
+
+    this.setState({
+      windDirection: wd,
+      windSpeed: ws,
+    });
+  }
+
+  // Hämtar vindriktning och gör om till pil
+  getWindDirection = (wd: number) => {
+    let west: string = "\u2190";
+    let north: string = "\u2191";
+    let east: string = "\u2192";
+    let south: string = "\u2193";
+    let northwest: string = "\u2196";
+    let northeast: string = "\u2197";
+    let southeast: string = "\u2198";
+    let southwest: string = "\u2199";
+
     if (wd > 337.5 || wd < 22.5) {
       return west;
     } else if (wd > 22.5 && wd < 67.5) {
@@ -40,4 +71,11 @@ export const getWindDirection = (wd: number) => {
     } else if (wd > 292.5 && wd < 337.5) {
       return southwest;
     }
+  };
+
+  render() {
+    return (
+      <div>{this.state.windDirection + ' ' + this.state.windSpeed + " m/s"}</div>
+    );
   }
+}
