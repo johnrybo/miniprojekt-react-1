@@ -14,7 +14,7 @@ interface State {
   sky: string;
   icon: string;
 }
-class Weather extends Component {
+export default class Weather extends Component {
   state: State = {
     locationServices: false,
     position: "",
@@ -33,9 +33,8 @@ class Weather extends Component {
     const success = (pos: any) => {
       var crd = pos.coords;
 
-      // SMHI:s API funkar endast med fem (eller sex?)decimaler
-      let longitude = crd.longitude.toFixed(6);
-      let latitude = crd.latitude.toFixed(6);
+      let longitude = crd.longitude;
+      let latitude = crd.latitude;
 
       this.getWeather(longitude, latitude);
 
@@ -58,6 +57,8 @@ class Weather extends Component {
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`;
     const response = await fetch(url);
     const result = await response.json();
+
+    console.log(result)
 
     this.setState({
       position: result.name,
@@ -132,7 +133,7 @@ class Weather extends Component {
     } else {
       return (
         <div>
-          <h1>Slå på dina platstjänster och ladda om sidan!</h1>
+          <h1 style={h1style2}>Slå på dina platstjänster och ladda om sidan!</h1>
         </div>
       );
     }
@@ -144,4 +145,6 @@ const h1style: CSSProperties = {
   fontSize: "5rem",
 };
 
-export default Weather;
+const h1style2: CSSProperties = {
+  fontSize: "3rem",
+};
