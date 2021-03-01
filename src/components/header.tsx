@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import '../App.css';
+import Lottie from "lottie-react";
+import myAnimation from './lotties/wind-animation.json';
+
 
 function Header() {
     return (
        <header>
-           <p>VÄDRET HOS DIG 🌤☁️⛈❄️☃️💨</p>
+           <Lottie style={myImage} animationData={myAnimation}/>
        </header>
     )
+}
+
+const myImage: CSSProperties = {
+    width: '13rem'
 }
 
 export default Header;
