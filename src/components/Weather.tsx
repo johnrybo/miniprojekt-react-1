@@ -52,7 +52,7 @@ export default class Weather extends Component {
     navigator.geolocation.getCurrentPosition(success, error);
   }
 
-  async getWeather(lon: number, lat: number) {
+   async getWeather(lon: number, lat: number) {
     let APIKey = "c2a3479cf7f0d7dd2b48b2f371689e02";
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`;
     const response = await fetch(url);
@@ -147,4 +147,5 @@ const h1style: CSSProperties = {
 
 const h1style2: CSSProperties = {
   fontSize: "3rem",
+  marginBottom: '5rem'
 };
