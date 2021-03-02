@@ -24,7 +24,7 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div style={rootStyle}>
-          <p style={textStyle}>Något gick fel. Ladda om sidan!</p>
+          <p style={textStyle}>Something went wrong :( please reload page.</p>
         </div>
       );
     }

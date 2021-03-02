@@ -26,7 +26,8 @@ export default class Info extends Component {
 
 const pStyle: CSSProperties = {
   color: 'white',
-  padding: '1rem'
+  padding: '1rem',
+  textAlign: 'center'
 }
 
 const aStyle: CSSProperties = {

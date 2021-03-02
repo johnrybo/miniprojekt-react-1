@@ -25,8 +25,6 @@ export default class NewYork extends Component {
     const response = await fetch(url);
     const result = await response.json();
 
-    console.log(result);
-
     this.setState({
       position: result.name,
       temp: result.main.temp.toFixed(0),

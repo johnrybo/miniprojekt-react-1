@@ -1,6 +1,6 @@
 import React from "react";
-import { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Component, CSSProperties } from "react";
+import { Link, Route, Switch } from "react-router-dom";
 import "../App.css";
 import Info from "./Info";
 
@@ -29,9 +29,18 @@ class Main extends Component {
           <Route path="/info">
             <Info />
           </Route>
+          <div style={{textAlign: 'center'}}>
+            <h2 style={{padding: '1rem'}}>This page doesn't exist :( 404</h2>
+              <Link to="/" style={linkStyle}>Return to the start page</Link>
+          </div>
         </Switch>
     );
   }
 }
 
 export default Main;
+
+const linkStyle: CSSProperties = {
+  color: "white",
+  textAlign: 'center'
+};
