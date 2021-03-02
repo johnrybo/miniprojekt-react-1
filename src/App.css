@@ -19,7 +19,6 @@ header, footer p {
   color: white;
   font-size: .8rem;
   font-weight: bold;
-  font-family: 'Varela Round', sans-serif;
 }
 
 footer {
@@ -86,7 +85,7 @@ h4 {
 
 .cities > * {
   width: 10rem;
-  padding: 0 2rem 0 2rem;
+  padding: 0 3rem 0 3rem;
 }
 
 .cities {
