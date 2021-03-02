@@ -7,6 +7,7 @@ import Info from "./Info";
 import Melbourne from "./Melbourne";
 import NewYork from "./NewYork";
 import Paris from "./Paris";
+import Tokyo from "./Tokyo";
 
 //import components
 import Weather from "./Weather";
@@ -23,6 +24,7 @@ class Main extends Component {
                 <NewYork />
                 <Melbourne />
                 <Paris />
+                <Tokyo />
               </div>
             </main>
           </Route>
