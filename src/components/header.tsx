@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import myAnimation from './lotties/wind-animation.json';
 
 
-function Header() {
+export default function Header() {
     return (
        <header>
            <Lottie style={myImage} animationData={myAnimation}/>
@@ -15,5 +15,3 @@ function Header() {
 const myImage: CSSProperties = {
     width: '10.5rem',
 }
-
-export default Header;
