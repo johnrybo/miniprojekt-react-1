@@ -14,6 +14,7 @@ interface State {
   sky: string;
   description: string,
   icon: string;
+  time: number;
 }
 export default class Weather extends Component {
   state: State = {
@@ -25,6 +26,7 @@ export default class Weather extends Component {
     sky: "",
     description: "",
     icon: "",
+    time: 0,
   };
 
   componentDidMount() {
@@ -107,18 +109,35 @@ export default class Weather extends Component {
   };
 
   getWeatherIcon(sky: any) {
-    if (sky === "Clear") {
+    let d = new Date();
+    let n = d.getHours();
+    
+    this.setState({time: n})
+    
+    if (sky === "Clear" && this.state.time >= 7 && this.state.time <= 20) {
       return "01d";
-    } else if (sky === "Thunderstorm") {
+    } else if ((sky === "Clear" && this.state.time < 7) || (sky === "Clear" && this.state.time > 20)) {
+      return "01n";
+    } else if (sky === "Thunderstorm" && this.state.time >= 7 && this.state.time <= 20) {
       return "11d";
-    } else if (sky === "Drizzle") {
+    } else if ((sky === "Thunderstorm" && this.state.time < 7) || (sky === "Thunderstorm" && this.state.time > 20)) {
+      return "11n";
+    } else if (sky === "Drizzle" && this.state.time >= 7 && this.state.time <= 20) {
       return "09d";
-    } else if (sky === "Rain") {
+    } else if ((sky === "Drizzle" && this.state.time < 7) || (sky === "Drizzle" && this.state.time > 20)) {
+      return "09n";
+    } else if (sky === "Rain" && this.state.time >= 7 && this.state.time <= 20) {
       return "10d";
-    } else if (sky === "Snow") {
+    } else if ((sky === "Rain" && this.state.time < 7) || (sky === "Rain" && this.state.time > 20)) {
+      return "10n";
+    } else if (sky === "Snow" && this.state.time >= 7 && this.state.time <= 20) {
       return "13d";
-    } else if (sky === "Clouds") {
+    } else if ((sky === "Snow" && this.state.time < 7) || (sky === "Snow" && this.state.time > 20)) {
+      return "13n";
+    } else if (sky === "Clouds" && this.state.time >= 7 && this.state.time <= 20) {
       return "03d";
+    } else if ((sky === "Clouds" && this.state.time < 7) || (sky === "Clouds" && this.state.time > 20)) {
+      return "03n";
     } else {
       return "50d"; // Atmosphere
     }
