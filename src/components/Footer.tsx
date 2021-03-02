@@ -1,36 +1,20 @@
-import React, { CSSProperties } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "../App.css";
-import Info from "./Info";
+import React, { CSSProperties } from 'react';
+import '../App.css';
+import logo from './assets/logo.png';
+
 
 function Footer() {
-  return (
-    <Router>
-      <footer style={footerStyle}>
-        <p>© JML 2021🌤</p>
-        <p>
-          <Link to="/info" style={linkStyle}>
-            Information om väderdatan
-          </Link>
-        </p>
-      </footer>
-
-      <Route path="/info">
-        <Info />
-      </Route>
-
-    </Router>
-  );
+    return(
+        <footer>
+            <text>
+                <img style={logoStyle} src={logo} alt="logo"></img>
+                &nbsp; 
+            <p> ©  2021</p>
+            </text>
+        </footer>
+    )
 }
-
-const footerStyle: CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column'
+const logoStyle: CSSProperties = {
+    width: '3rem'
 }
-
-const linkStyle: CSSProperties = {
-  cursor: "pointer",
-  color: 'white'
-}
-
 export default Footer;
