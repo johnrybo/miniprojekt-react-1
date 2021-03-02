@@ -69,7 +69,7 @@ export default class Weather extends Component {
       windSpeed: result.wind.speed.toFixed(1),
       sky: result.weather[0].main,
       description: this.capitalizeFirstLetter(result.weather[0].description),
-      icon: this.getWeatherIcon(result.weather[0].main),
+      icon: this.getWeatherIcon(result.weather[0].main, result.weather[0].description),
     });
   }
 
@@ -106,7 +106,7 @@ export default class Weather extends Component {
     }
   };
 
-  getWeatherIcon(sky: any) {
+  getWeatherIcon(sky: any, description: any) {
     let date = new Date();
     let hour = date.getHours();
     this.setState({time: hour})
@@ -115,26 +115,22 @@ export default class Weather extends Component {
       return "01d";
     } else if ((sky === "Clear" && this.state.time < 7) || (sky === "Clear" && this.state.time > 20)) {
       return "01n";
-    } else if (sky === "Thunderstorm" && this.state.time >= 7 && this.state.time <= 20) {
+    } else if (sky === "Thunderstorm") {
       return "11d";
-    } else if ((sky === "Thunderstorm" && this.state.time < 7) || (sky === "Thunderstorm" && this.state.time > 20)) {
-      return "11n";
-    } else if (sky === "Drizzle" && this.state.time >= 7 && this.state.time <= 20) {
+    } else if (sky === "Drizzle") {
       return "09d";
-    } else if ((sky === "Drizzle" && this.state.time < 7) || (sky === "Drizzle" && this.state.time > 20)) {
-      return "09n";
     } else if (sky === "Rain" && this.state.time >= 7 && this.state.time <= 20) {
       return "10d";
     } else if ((sky === "Rain" && this.state.time < 7) || (sky === "Rain" && this.state.time > 20)) {
       return "10n";
-    } else if (sky === "Snow" && this.state.time >= 7 && this.state.time <= 20) {
+    } else if (sky === "Snow") {
       return "13d";
-    } else if ((sky === "Snow" && this.state.time < 7) || (sky === "Snow" && this.state.time > 20)) {
-      return "13n";
-    } else if (sky === "Clouds" && this.state.time >= 7 && this.state.time <= 20) {
+    } else if (sky === "Clouds" && description !== 'few clouds') {
       return "03d";
-    } else if ((sky === "Clouds" && this.state.time < 7) || (sky === "Clouds" && this.state.time > 20)) {
-      return "03n";
+    } else if (sky === "Clouds" && description === 'few clouds' && this.state.time >= 7 && this.state.time <= 20) {
+      return "02d";
+    } else if ((sky === "Clouds" && description === 'few clouds' && this.state.time < 7) || (sky === "Clouds" && description === 'few clouds' && this.state.time > 20)) {
+      return "02n";
     } else {
       return "50d"; // Atmosphere
     }
