@@ -13,7 +13,7 @@ function Header() {
 }
 
 const myImage: CSSProperties = {
-    width: '10rem',
+    width: '15rem',
 }
 
 export default Header;

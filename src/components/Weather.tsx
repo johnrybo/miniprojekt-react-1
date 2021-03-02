@@ -36,10 +36,8 @@ export default class Weather extends Component {
   getUserLocation() {
     const success = (pos: any) => {
       var crd = pos.coords;
-
       let longitude = crd.longitude;
       let latitude = crd.latitude;
-
       this.getWeather(longitude, latitude);
 
       this.setState({
@@ -47,7 +45,7 @@ export default class Weather extends Component {
       });
     };
 
-    const error = (err: any) => {
+    const error = () => {
       this.setState({
         locationServices: false,
       });
@@ -109,10 +107,9 @@ export default class Weather extends Component {
   };
 
   getWeatherIcon(sky: any) {
-    let d = new Date();
-    let n = d.getHours();
-    
-    this.setState({time: n})
+    let date = new Date();
+    let hour = date.getHours();
+    this.setState({time: hour})
     
     if (sky === "Clear" && this.state.time >= 7 && this.state.time <= 20) {
       return "01d";

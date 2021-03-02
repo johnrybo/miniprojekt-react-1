@@ -124,7 +124,7 @@ img {
   }
 }
 
-@media (min-height: 850px) and (min-width: 900px) {
+@media (min-height: 875px) and (min-width: 900px) {
   footer {
     position: fixed;
     bottom: 0;
