@@ -12,6 +12,7 @@ interface State {
   windDirection: number;
   windSpeed: number;
   sky: string;
+  description: string,
   icon: string;
 }
 export default class Weather extends Component {
@@ -22,6 +23,7 @@ export default class Weather extends Component {
     windDirection: 0,
     windSpeed: 0,
     sky: "",
+    description: "",
     icon: "",
   };
 
@@ -66,8 +68,13 @@ export default class Weather extends Component {
       windDirection: this.getWindDirection(result.wind.deg),
       windSpeed: result.wind.speed.toFixed(1),
       sky: result.weather[0].main,
+      description: this.capitalizeFirstLetter(result.weather[0].description),
       icon: this.getWeatherIcon(result.weather[0].main),
     });
+  }
+
+  capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   getWindDirection = (wd: number) => {
@@ -127,7 +134,7 @@ export default class Weather extends Component {
             windDirection={this.state.windDirection}
             windSpeed={this.state.windSpeed}
           />
-          <Sky sky={this.state.sky} icon={this.state.icon} />
+          <Sky sky={this.state.description} icon={this.state.icon} />
         </div>
       );
     } else {
