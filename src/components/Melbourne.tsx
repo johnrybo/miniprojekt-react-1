@@ -1,4 +1,4 @@
-import { Component, CSSProperties } from "react";
+import { Component } from "react";
 import "../App.css";
 
 interface State {
@@ -40,19 +40,11 @@ export default class Melbourne extends Component {
 
   render() {
     return (
-      <div style={center}>
-        <h1 style={textStyle}>{this.state.position}</h1>
-        <h2>{this.state.temp + ' °C'}</h2>
-        <h2>{this.state.description}</h2>
+      <div>
+        <h3>{this.state.position}</h3>
+        <h4>{this.state.temp + ' °C'}</h4>
+        <h4>{this.state.description}</h4>
       </div>
     );
   }
-}
-
-const textStyle: CSSProperties = {
-    fontSize: '1.5rem'
-}
-
-const center: CSSProperties = {
-    textAlign: 'center'
 }

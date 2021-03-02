@@ -1,4 +1,4 @@
-import { Component, CSSProperties } from "react";
+import { Component } from "react";
 import "../App.css";
 
 import Temp from "./Temp";
@@ -147,7 +147,7 @@ export default class Weather extends Component {
     if (this.state.locationServices) {
       return (
         <div className="Weather">
-          <h1 style={h1style}>{this.state.position}</h1>
+          <h1>{this.state.position}</h1>
           <Temp temp={this.state.temp} />
           <Wind
             windDirection={this.state.windDirection}
@@ -159,19 +159,9 @@ export default class Weather extends Component {
     } else {
       return (
         <div>
-          <h1 style={h1style2}>Please turn on your location services and reload the page</h1>
+          <h2 className='locationText'>Please turn on your location services and reload the page</h2>
         </div>
       );
     }
   }
 }
-
-const h1style: CSSProperties = {
-  marginBottom: "2rem",
-  fontSize: "4rem",
-};
-
-const h1style2: CSSProperties = {
-  fontSize: "2rem",
-  marginBottom: '5rem'
-};

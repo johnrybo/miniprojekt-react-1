@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import { Component } from "react";
 import "../App.css";
 
@@ -13,21 +13,14 @@ class Main extends Component {
     return (
       <main>
         <Weather />
-        <div style={cities}>
-        <Melbourne />
+        <div className='cities'>
         <NewYork />
+        <Melbourne />
         <Paris />
         </div>
       </main>
     );
   }
-}
-
-const cities: CSSProperties = {
-  display: 'flex',
-  justifyContent: 'space-evenly',
-  width: '100%',
-  marginBottom: '2rem'
 }
 
 export default Main;

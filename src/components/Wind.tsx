@@ -1,4 +1,4 @@
-import { Component, CSSProperties } from "react";
+import { Component } from "react";
 import "../App.css";
 interface Props {
   windDirection: any;
@@ -7,13 +7,9 @@ interface Props {
 export default class Wind extends Component<Props> {
   render() {
     return (
-      <div style={windStyle}>
+      <h2>
         {this.props.windDirection + " " + this.props.windSpeed + " m/s"}
-      </div>
+      </h2>
     );
   }
 }
-
-const windStyle: CSSProperties = {
-  display: "flex",
-};

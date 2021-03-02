@@ -6,6 +6,6 @@ interface Props {
 export default class Temp extends Component<Props> {
 
   render() {
-    return <div>{this.props.temp + ' °C'}</div>;
+    return <h2>{this.props.temp + ' °C'}</h2>;
   }
 }

@@ -8,7 +8,7 @@ export default class Sky extends Component<Props> {
   render() {
     return (
       <div style={skyStyle}>
-        <div style={textStyle}>{this.props.sky}</div>
+        <h2>{this.props.sky}</h2>
         <img src={`http://openweathermap.org/img/wn/${this.props.icon}@4x.png`} alt="Weather icon"/>
       </div>
     );
@@ -20,7 +20,3 @@ const skyStyle: CSSProperties = {
   flexDirection: 'column',
   textAlign: 'center'
 };
-
-const textStyle: CSSProperties = {
-  fontSize: '2rem'
-}
