@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react";
 import { Component } from "react";
 import "../App.css";
 
-import London from "./London";
+import Melbourne from "./Melbourne";
 import NewYork from "./NewYork";
 import Paris from "./Paris";
 
@@ -14,7 +14,7 @@ class Main extends Component {
       <main>
         <Weather />
         <div style={cities}>
-        <London />
+        <Melbourne />
         <NewYork />
         <Paris />
         </div>

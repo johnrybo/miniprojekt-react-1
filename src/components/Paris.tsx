@@ -4,13 +4,13 @@ import "../App.css";
 interface State {
   position: string;
   temp: number;
-  sky: string;
+  description: string;
 }
 export default class Paris extends Component {
   state: State = {
     position: "",
     temp: 0,
-    sky: "",
+    description: "",
   };
 
   componentDidMount() {
@@ -30,8 +30,12 @@ export default class Paris extends Component {
     this.setState({
       position: result.name,
       temp: result.main.temp.toFixed(0),
-      sky: result.weather[0].main,
+      description: this.capitalizeFirstLetter(result.weather[0].description)
     });
+  }
+
+  capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   render() {
@@ -39,7 +43,7 @@ export default class Paris extends Component {
       <div style={center}>
         <h1 style={textStyle}>{this.state.position}</h1>
         <h2>{this.state.temp + ' °C'}</h2>
-        <h2>{this.state.sky}</h2>
+        <h2>{this.state.description}</h2>
       </div>
     );
   }
