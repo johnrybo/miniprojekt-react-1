@@ -26,7 +26,8 @@ class Main extends Component {
 const cities: CSSProperties = {
   display: 'flex',
   justifyContent: 'space-evenly',
-  width: '100%'
+  width: '100%',
+  marginBottom: '2rem'
 }
 
 export default Main;

@@ -159,7 +159,7 @@ export default class Weather extends Component {
     } else {
       return (
         <div>
-          <h1 style={h1style2}>Slå på dina platstjänster och ladda om sidan!</h1>
+          <h1 style={h1style2}>Please turn on your location services and reload the page</h1>
         </div>
       );
     }
@@ -172,6 +172,6 @@ const h1style: CSSProperties = {
 };
 
 const h1style2: CSSProperties = {
-  fontSize: "3rem",
+  fontSize: "2rem",
   marginBottom: '5rem'
 };
