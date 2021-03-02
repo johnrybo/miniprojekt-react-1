@@ -149,7 +149,7 @@ export default class Weather extends Component {
 
 const h1style: CSSProperties = {
   marginBottom: "2rem",
-  fontSize: "5rem",
+  fontSize: "4rem",
 };
 
 const h1style2: CSSProperties = {
