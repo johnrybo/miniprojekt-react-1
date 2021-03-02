@@ -8,7 +8,7 @@ export default class Info extends Component {
         <div style={infoStyle}>
           <h2>Information</h2>
           <p style={pStyle}>
-            The weather data comes from <a style={aStyle} href="https://openweathermap.org/">OpenWeaher</a>
+            The weather data comes from <a style={aStyle} href="https://openweathermap.org/">OpenWeather</a>
           </p>
           <div style={memberStyle}>
             <span style={{padding: '1rem'}}>Project members:</span>
@@ -16,6 +16,7 @@ export default class Info extends Component {
             <span>Mia Herman</span>
             <span>John Rybo</span>
           </div>
+          <a style={aStyle} href="https://github.com/johnrybo/miniprojekt-react-1">GitHub Repository</a>
           <Link to="/" style={linkStyle}>
             Return to the start page
           </Link>
@@ -31,14 +32,15 @@ const pStyle: CSSProperties = {
 }
 
 const aStyle: CSSProperties = {
-  color: 'white'
+  color: 'white',
+  padding: '1rem 0 1rem 0'
 }
 
 const memberStyle: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   textAlign:'center',
-  padding: '1rem',
+  padding: '1rem 0 1rem 0',
   color: 'white'
 }
 
