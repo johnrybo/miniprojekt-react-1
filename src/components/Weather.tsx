@@ -5,6 +5,17 @@ import Temp from "./Temp";
 import Wind from "./Wind";
 import Sky from "./Sky";
 
+import {
+  BsArrowDownLeft,
+  BsArrowDownRight,
+  BsArrowDown,
+  BsArrowUp,
+  BsArrowLeft,
+  BsArrowRight,
+  BsArrowUpLeft,
+  BsArrowUpRight,
+} from "react-icons/bs";
+
 interface State {
   locationServices: boolean;
   position: string;
@@ -12,8 +23,8 @@ interface State {
   windDirection: number;
   windSpeed: number;
   sky: string;
-  description: string,
-  icon: string;
+  description: string;
+  icon: any;
   time: number;
 }
 export default class Weather extends Component {
@@ -54,7 +65,7 @@ export default class Weather extends Component {
     navigator.geolocation.getCurrentPosition(success, error);
   }
 
-   async getWeather(lon: number, lat: number) {
+  async getWeather(lon: number, lat: number) {
     let APIKey = "c2a3479cf7f0d7dd2b48b2f371689e02";
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`;
     const response = await fetch(url);
@@ -67,7 +78,10 @@ export default class Weather extends Component {
       windSpeed: result.wind.speed.toFixed(1),
       sky: result.weather[0].main,
       description: this.capitalizeFirstLetter(result.weather[0].description),
-      icon: this.getWeatherIcon(result.weather[0].main, result.weather[0].description),
+      icon: this.getWeatherIcon(
+        result.weather[0].main,
+        result.weather[0].description
+      ),
     });
   }
 
@@ -76,58 +90,88 @@ export default class Weather extends Component {
   }
 
   getWindDirection = (wd: number) => {
-    let west: string = "\u2190";
-    let north: string = "\u2191";
-    let east: string = "\u2192";
-    let south: string = "\u2193";
-    let northwest: string = "\u2196";
-    let northeast: string = "\u2197";
-    let southeast: string = "\u2198";
-    let southwest: string = "\u2199";
+    
+    // let west: string = "\u2190";
+    // let north: string = "\u2191";
+    // let east: string = "\u2192";
+    // let south: string = "\u2193";
+    // let northwest: string = "\u2196";
+    // let northeast: string = "\u2197";
+    // let southeast: string = "\u2198";
+    // let southwest: string = "\u2199";
+    
+    // let west: any = <BsArrowLeft />;
+    // let north: any = <BsArrowUp />;
+    // let east: any = <BsArrowRight />;
+    // let south: any = <BsArrowDown />;
+    // let northwest: any = <BsArrowUpLeft />;
+    // let northeast: any = <BsArrowUpRight />;
+    // let southeast: any = <BsArrowDownRight />;
+    // let southwest: any = <BsArrowDownLeft />;
 
     if (wd > 337.5 || wd < 22.5) {
-      return west;
+      return <BsArrowLeft />;
     } else if (wd > 22.5 && wd < 67.5) {
-      return northwest;
+      return <BsArrowUpLeft />;
     } else if (wd > 67.5 && wd < 112.5) {
-      return north;
+      return <BsArrowUp />;
     } else if (wd > 112.5 && wd < 157.5) {
-      return northeast;
+      return <BsArrowUpRight />;
     } else if (wd > 157.5 && wd < 202.5) {
-      return east;
+      return <BsArrowRight />;
     } else if (wd > 202.5 && wd < 247.5) {
-      return southeast;
+      return <BsArrowDownRight />;
     } else if (wd > 247.5 && wd < 292.5) {
-      return south;
+      return <BsArrowDown />;
     } else if (wd > 292.5 && wd < 337.5) {
-      return southwest;
+      return <BsArrowDownLeft />;
     }
   };
 
   getWeatherIcon(sky: any, description: any) {
     let date = new Date();
     let hour = date.getHours();
-    this.setState({time: hour})
-    
+    this.setState({ time: hour });
+
     if (sky === "Clear" && this.state.time >= 7 && this.state.time <= 19) {
       return "01d";
-    } else if ((sky === "Clear" && this.state.time < 7) || (sky === "Clear" && this.state.time > 19)) {
+    } else if (
+      (sky === "Clear" && this.state.time < 7) ||
+      (sky === "Clear" && this.state.time > 19)
+    ) {
       return "01n";
     } else if (sky === "Thunderstorm") {
       return "11d";
     } else if (sky === "Drizzle") {
       return "09d";
-    } else if (sky === "Rain" && this.state.time >= 7 && this.state.time <= 19) {
+    } else if (
+      sky === "Rain" &&
+      this.state.time >= 7 &&
+      this.state.time <= 19
+    ) {
       return "10d";
-    } else if ((sky === "Rain" && this.state.time < 7) || (sky === "Rain" && this.state.time > 19)) {
+    } else if (
+      (sky === "Rain" && this.state.time < 7) ||
+      (sky === "Rain" && this.state.time > 19)
+    ) {
       return "10n";
     } else if (sky === "Snow") {
       return "13d";
-    } else if (sky === "Clouds" && description !== 'few clouds') {
+    } else if (sky === "Clouds" && description !== "few clouds") {
       return "03d";
-    } else if (sky === "Clouds" && description === 'few clouds' && this.state.time >= 7 && this.state.time <= 19) {
+    } else if (
+      sky === "Clouds" &&
+      description === "few clouds" &&
+      this.state.time >= 7 &&
+      this.state.time <= 19
+    ) {
       return "02d";
-    } else if ((sky === "Clouds" && description === 'few clouds' && this.state.time < 7) || (sky === "Clouds" && description === 'few clouds' && this.state.time > 19)) {
+    } else if (
+      (sky === "Clouds" &&
+        description === "few clouds" &&
+        this.state.time < 7) ||
+      (sky === "Clouds" && description === "few clouds" && this.state.time > 19)
+    ) {
       return "02n";
     } else {
       return "50d"; // Atmosphere
@@ -137,20 +181,22 @@ export default class Weather extends Component {
   render() {
     if (this.state.locationServices) {
       return (
-          <div className="Weather">
-            <h1>{this.state.position}</h1>
-            <Temp temp={this.state.temp} />
-            <Wind
-              windDirection={this.state.windDirection}
-              windSpeed={this.state.windSpeed}
-            />
-            <Sky sky={this.state.description} icon={this.state.icon} />
-          </div>
+        <div className="Weather">
+          <h1>{this.state.position}</h1>
+          <Temp temp={this.state.temp} />
+          <Wind
+            windDirection={this.state.windDirection}
+            windSpeed={this.state.windSpeed}
+          />
+          <Sky sky={this.state.description} icon={this.state.icon} />
+        </div>
       );
     } else {
       return (
         <div>
-          <h2 className='locationText'>Please turn on your location services and reload the page</h2>
+          <h2 className="locationText">
+            Please turn on your location services and reload the page
+          </h2>
         </div>
       );
     }

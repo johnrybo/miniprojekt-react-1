@@ -18,6 +18,7 @@
     "react-audio-player": "^0.14.0",
     "react-dom": "^17.0.1",
     "react-error-boundary": "^3.1.0",
+    "react-icons": "^4.2.0",
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
