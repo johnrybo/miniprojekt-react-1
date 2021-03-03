@@ -1,4 +1,5 @@
 import { Component, CSSProperties } from "react";
+
 import "../App.css";
 interface Props {
   sky: any;
@@ -7,10 +8,10 @@ interface Props {
 export default class Sky extends Component<Props> {
   render() {
     return (
-      <div style={skyStyle}>
-        <h2>{this.props.sky}</h2>
-        <img src={`https://openweathermap.org/img/wn/${this.props.icon}@4x.png`} alt="Weather icon"/>
-      </div>
+        <div style={skyStyle}>
+          <h2>{this.props.sky}</h2>
+          <img src={`https://openweathermap.org/img/wn/${this.props.icon}@4x.png`} alt="Weather icon"/>
+        </div>
     );
   }
 }

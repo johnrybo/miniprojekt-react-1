@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import "../App.css";
 
 import Temp from "./Temp";
@@ -137,15 +137,15 @@ export default class Weather extends Component {
   render() {
     if (this.state.locationServices) {
       return (
-        <div className="Weather">
-          <h1>{this.state.position}</h1>
-          <Temp temp={this.state.temp} />
-          <Wind
-            windDirection={this.state.windDirection}
-            windSpeed={this.state.windSpeed}
-          />
-          <Sky sky={this.state.description} icon={this.state.icon} />
-        </div>
+          <div className="Weather">
+            <h1>{this.state.position}</h1>
+            <Temp temp={this.state.temp} />
+            <Wind
+              windDirection={this.state.windDirection}
+              windSpeed={this.state.windSpeed}
+            />
+            <Sky sky={this.state.description} icon={this.state.icon} />
+          </div>
       );
     } else {
       return (

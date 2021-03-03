@@ -5,6 +5,7 @@ import "./App.css";
 import Header from "./components/header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
+import ErrorBoundary from "./components/errorBoundary";
 
 interface State {
   backgroundColor: string;
@@ -39,9 +40,15 @@ export default class App extends Component {
         className="App"
         style={{ backgroundColor: this.state.backgroundColor }}
       >
-        <Header />
-        <Main />
-        <Footer />
+        <ErrorBoundary>
+          <Header />
+        </ErrorBoundary> 
+        <ErrorBoundary>
+          <Main />
+        </ErrorBoundary> 
+        <ErrorBoundary>
+          <Footer />
+        </ErrorBoundary> 
       </div>
     );
   }
