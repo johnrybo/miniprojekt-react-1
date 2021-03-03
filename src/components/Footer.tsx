@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../App.css";
 import logo from "./assets/logo.png";
 
-function Footer() {
+export default function Footer() {
   return (
     <footer>
       <img style={logoStyle} src={logo} alt="logo"></img>
@@ -25,5 +25,3 @@ const logoStyle: CSSProperties = {
 const linkStyle: CSSProperties = {
   color: "white",
 };
-
-export default Footer;
