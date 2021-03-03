@@ -6,7 +6,7 @@ interface State {
   temp: number;
   description: string;
 }
-export default class Paris extends Component {
+export default class Rabat extends Component {
   state: State = {
     position: "",
     temp: 0,
@@ -14,8 +14,8 @@ export default class Paris extends Component {
   };
 
   componentDidMount() {
-    let lon = 2.3488;
-    let lat = 48.8534;
+    let lon = -8.0083;
+    let lat = 31.6315;
     this.getWeather(lon, lat);
   }
 

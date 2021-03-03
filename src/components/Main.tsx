@@ -5,8 +5,8 @@ import "../App.css";
 import Info from "./Info";
 
 import Melbourne from "./Melbourne";
-import NewYork from "./NewYork";
-import Paris from "./Paris";
+import BuenosAires from "./BuenosAires";
+import Rabat from "./Rabat";
 import Tokyo from "./Tokyo";
 
 import Music from "./Music";
@@ -24,9 +24,9 @@ class Main extends Component {
               <Weather />
               <Music />
               <div className="cities">
-                <NewYork />
+                <BuenosAires />
                 <Melbourne />
-                <Paris />
+                <Rabat />
                 <Tokyo />
               </div>
             </main>
