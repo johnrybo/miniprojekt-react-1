@@ -13,8 +13,8 @@ export default class Info extends Component {
           <div style={memberStyle}>
             <span style={{padding: '1rem'}}>Project members:</span>
             <span>Linda Söder</span>
-            <span>Mia Herman</span>
-            <span>John Rybo</span>
+            <span style={{paddingTop: '.3rem'}}>Mia Herman</span>
+            <span style={{paddingTop: '.3rem'}}>John Rybo</span>
           </div>
           <a style={aStyle} href="https://github.com/johnrybo/miniprojekt-react-1">GitHub Repository</a>
           <Link to="/" style={linkStyle}>
