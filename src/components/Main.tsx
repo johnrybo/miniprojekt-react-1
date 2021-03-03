@@ -14,7 +14,7 @@ import Music from "./Music";
 //import components
 import Weather from "./Weather";
 
-class Main extends Component {
+export default class Main extends Component {
 
   render() {
     return (
@@ -42,8 +42,6 @@ class Main extends Component {
     );
   }
 }
-
-export default Main;
 
 const linkStyle: CSSProperties = {
   color: "white",
