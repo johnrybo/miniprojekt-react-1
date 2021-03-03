@@ -10,7 +10,7 @@ export default class Sky extends Component<Props> {
     return (
         <div style={skyStyle}>
           <h2>{this.props.sky}</h2>
-          <img src={`https://openweathermap.org/img/wn/${this.props.icon}@4x.png`} alt="Weather icon"/>
+          <img style={imgStyle} src={`https://openweathermap.org/img/wn/${this.props.icon}@4x.png`} alt="Weather icon"/>
         </div>
     );
   }
@@ -19,5 +19,11 @@ export default class Sky extends Component<Props> {
 const skyStyle: CSSProperties = {
   display: "flex",
   flexDirection: 'column',
-  textAlign: 'center'
+  textAlign: 'center',
+  alignItems: 'center'
 };
+
+const imgStyle: CSSProperties = {
+  width: '75%',
+  height: 'auto'
+}
