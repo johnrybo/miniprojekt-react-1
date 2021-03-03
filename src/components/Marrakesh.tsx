@@ -6,7 +6,7 @@ interface State {
   temp: number;
   description: string;
 }
-export default class Rabat extends Component {
+export default class Marrakesh extends Component {
   state: State = {
     position: "",
     temp: 0,
