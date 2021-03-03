@@ -6,7 +6,7 @@ import Info from "./Info";
 
 import Melbourne from "./Melbourne";
 import BuenosAires from "./BuenosAires";
-import Rabat from "./Rabat";
+import Marrakesh from "./Marrakesh";
 import Tokyo from "./Tokyo";
 
 import Music from "./Music";
@@ -26,7 +26,7 @@ export default class Main extends Component {
               <div className="cities">
                 <BuenosAires />
                 <Melbourne />
-                <Rabat />
+                <Marrakesh />
                 <Tokyo />
               </div>
             </main>
