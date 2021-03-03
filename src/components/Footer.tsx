@@ -1,6 +1,7 @@
 import React, { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
+// @ts-ignore
 import logo from "./assets/logo.png";
 
 export default function Footer() {

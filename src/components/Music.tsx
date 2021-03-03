@@ -1,5 +1,6 @@
 import React, { Component, CSSProperties } from "react";
 import ReactAudioPlayer from 'react-audio-player';
+// @ts-ignore
 import mp3 from "./assets/songbirds.mp3";
 
 export default class Music extends Component{
