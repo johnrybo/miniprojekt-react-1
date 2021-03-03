@@ -7,6 +7,9 @@ import Info from "./Info";
 import Melbourne from "./Melbourne";
 import NewYork from "./NewYork";
 import Paris from "./Paris";
+import Tokyo from "./Tokyo";
+
+import Music from "./Music";
 
 //import components
 import Weather from "./Weather";
@@ -19,10 +22,12 @@ export default class Main extends Component {
           <Route exact path="/">
             <main>
               <Weather />
+              <Music />
               <div className="cities">
                 <NewYork />
                 <Melbourne />
                 <Paris />
+                <Tokyo />
               </div>
             </main>
           </Route>
