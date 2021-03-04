@@ -38,17 +38,16 @@ export default class App extends Component {
     return (
       <div
         className="App"
-        style={{ backgroundColor: this.state.backgroundColor }}
-      >
+        style={{ backgroundColor: this.state.backgroundColor }}>
         <ErrorBoundary>
           <Header />
-        </ErrorBoundary> 
+        </ErrorBoundary>
         <ErrorBoundary>
           <Main />
-        </ErrorBoundary> 
+        </ErrorBoundary>
         <ErrorBoundary>
           <Footer />
-        </ErrorBoundary> 
+        </ErrorBoundary>
       </div>
     );
   }

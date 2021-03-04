@@ -28,7 +28,7 @@ export default class Tokyo extends Component {
     this.setState({
       position: result.name,
       temp: result.main.temp.toFixed(0),
-      description: this.capitalizeFirstLetter(result.weather[0].description)
+      description: this.capitalizeFirstLetter(result.weather[0].description),
     });
   }
 
@@ -40,7 +40,7 @@ export default class Tokyo extends Component {
     return (
       <div>
         <h3>{this.state.position}</h3>
-        <h4>{this.state.temp + ' °C'}</h4>
+        <h4>{this.state.temp + " °C"}</h4>
         <h4>{this.state.description}</h4>
       </div>
     );

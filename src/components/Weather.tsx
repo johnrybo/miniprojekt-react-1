@@ -90,25 +90,6 @@ export default class Weather extends Component {
   }
 
   getWindDirection = (wd: number) => {
-    
-    // let west: string = "\u2190";
-    // let north: string = "\u2191";
-    // let east: string = "\u2192";
-    // let south: string = "\u2193";
-    // let northwest: string = "\u2196";
-    // let northeast: string = "\u2197";
-    // let southeast: string = "\u2198";
-    // let southwest: string = "\u2199";
-    
-    // let west: any = <BsArrowLeft />;
-    // let north: any = <BsArrowUp />;
-    // let east: any = <BsArrowRight />;
-    // let south: any = <BsArrowDown />;
-    // let northwest: any = <BsArrowUpLeft />;
-    // let northeast: any = <BsArrowUpRight />;
-    // let southeast: any = <BsArrowDownRight />;
-    // let southwest: any = <BsArrowDownLeft />;
-
     if (wd > 337.5 || wd < 22.5) {
       return <BsArrowLeft />;
     } else if (wd > 22.5 && wd < 67.5) {

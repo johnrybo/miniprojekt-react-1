@@ -8,7 +8,7 @@ interface State {
 
 class ErrorBoundary extends Component<Props, State> {
   state: State = {
-    hasError: false
+    hasError: false,
   };
 
   static getDerivedStateFromError(): State {
@@ -18,7 +18,6 @@ class ErrorBoundary extends Component<Props, State> {
   componentDidCatch?(error: Error, errorInfo: ErrorInfo): void {
     console.log({ error, errorInfo });
   }
-
 
   render() {
     if (this.state.hasError) {
@@ -40,13 +39,13 @@ export function testErrorBoundary() {
 const rootStyle: CSSProperties = {
   width: "100%",
   height: "100%",
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 const textStyle: CSSProperties = {
-    textAlign: 'center'
-}
+  textAlign: "center",
+};
 
 export default ErrorBoundary;

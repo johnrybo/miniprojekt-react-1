@@ -15,35 +15,36 @@ import Music from "./Music";
 import Weather from "./Weather";
 
 export default class Main extends Component {
-
   render() {
     return (
-        <Switch>
-          <Route exact path="/">
-            <main>
-              <Weather />
-              <Music />
-              <div className="cities">
-                <BuenosAires />
-                <Melbourne />
-                <Marrakesh />
-                <Tokyo />
-              </div>
-            </main>
-          </Route>
-          <Route path="/info">
-            <Info />
-          </Route>
-          <div style={{textAlign: 'center'}}>
-            <h2 style={{padding: '1rem'}}>This page doesn't exist :( 404</h2>
-              <Link to="/" style={linkStyle}>Return to the start page</Link>
-          </div>
-        </Switch>
+      <Switch>
+        <Route exact path="/">
+          <main>
+            <Weather />
+            <Music />
+            <div className="cities">
+              <BuenosAires />
+              <Melbourne />
+              <Marrakesh />
+              <Tokyo />
+            </div>
+          </main>
+        </Route>
+        <Route path="/info">
+          <Info />
+        </Route>
+        <div style={{ textAlign: "center" }}>
+          <h2 style={{ padding: "1rem" }}>This page doesn't exist :( 404</h2>
+          <Link to="/" style={linkStyle}>
+            Return to the start page
+          </Link>
+        </div>
+      </Switch>
     );
   }
 }
 
 const linkStyle: CSSProperties = {
   color: "white",
-  textAlign: 'center'
+  textAlign: "center",
 };
