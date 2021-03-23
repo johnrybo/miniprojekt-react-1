@@ -17,7 +17,7 @@ import {
 } from "react-icons/bs";
 
 interface State {
-  locationServices: boolean;
+  locationServices: boolean | null;
   position: string;
   temp: number;
   windDirection: number;
@@ -29,7 +29,7 @@ interface State {
 }
 export default class Weather extends Component {
   state: State = {
-    locationServices: false,
+    locationServices: null,
     position: "",
     temp: 0,
     windDirection: 0,
@@ -160,6 +160,7 @@ export default class Weather extends Component {
   }
 
   render() {
+    console.log(this.state.locationServices);
     if (this.state.locationServices) {
       return (
         <div className="Weather">
@@ -172,12 +173,18 @@ export default class Weather extends Component {
           <Sky sky={this.state.description} icon={this.state.icon} />
         </div>
       );
-    } else {
+    } else if (this.state.locationServices === false) {
       return (
         <div>
           <h2 className="locationText">
             Please turn on your location services and reload the page
           </h2>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h2 className="locationText">Loading...</h2>
         </div>
       );
     }
